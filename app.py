@@ -1,11 +1,9 @@
-
+import os
 import joblib
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 model = joblib.load("model.pkl")
-
-
 
 @app.route('/')
 def home():
@@ -22,5 +20,6 @@ def predict():
     return jsonify({'prediction': pred_list})
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5500)
-    
+    # Render provides the port in the PORT env variable
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
