@@ -1,3 +1,6 @@
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({'status': 'ok'})
 import os
 import joblib
 from flask import Flask, request, jsonify
